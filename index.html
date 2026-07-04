@@ -8,7 +8,7 @@
 <link rel="icon" type="image/webp" href="https://res.cloudinary.com/mwvdwia9/image/upload/v1783178711/unnamed_3_bpykhg.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --teal-950:#0B3D3A;
@@ -40,12 +40,18 @@
     width:100%;
     max-width:100vw;
   }
+  html[lang="hi"] body{
+    font-family:'Noto Sans Devanagari','Inter',sans-serif;
+  }
   h1,h2,h3,.display{
     font-family:'Fraunces',serif;
     font-weight:600;
     letter-spacing:-0.01em;
     margin:0;
     color:var(--teal-950);
+  }
+  html[lang="hi"] h1,html[lang="hi"] h2,html[lang="hi"] h3{
+    font-family:'Noto Sans Devanagari','Fraunces',serif;
   }
   em{font-style:italic;color:var(--coral);}
   p{margin:0;line-height:1.65;color:var(--ink-soft);}
@@ -60,6 +66,11 @@
     font-size:0.72rem;
     font-weight:600;
     color:var(--teal-700);
+  }
+  html[lang="hi"] .eyebrow{
+    font-family:'Noto Sans Devanagari',sans-serif;
+    text-transform:none;
+    letter-spacing:0.02em;
   }
   section{position:relative;}
   ::selection{background:var(--coral);color:white;}
@@ -99,6 +110,36 @@
   .btn-light{background:white;color:var(--teal-950);}
   .btn-light:hover{transform:translateY(-3px);box-shadow:0 16px 30px -14px rgba(0,0,0,0.35);}
   .btn svg{width:18px;height:18px;flex:none;}
+
+  /* ---------- language toggle ---------- */
+  .lang-toggle{
+    display:flex;align-items:center;gap:0.45rem;
+    font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:0.82rem;
+    padding:0.55rem 1rem;border-radius:999px;
+    background:var(--mint-100);color:var(--teal-950);
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:transform .3s var(--ease), background .3s var(--ease), color .3s var(--ease);
+    flex:none;
+    min-height:40px;
+    white-space:nowrap;
+  }
+  .lang-toggle:hover{transform:translateY(-2px);background:var(--teal-950);color:white;}
+  .lang-toggle svg{width:16px;height:16px;flex:none;}
+  .lang-toggle .lang-toggle-label{font-family:'Noto Sans Devanagari','IBM Plex Mono',monospace;}
+  @media (max-width:860px){
+    .header-actions .lang-toggle{
+      padding:0;
+      width:40px;height:40px;
+      justify-content:center;
+    }
+    .header-actions .lang-toggle .lang-toggle-label{display:none;}
+  }
+  .mobile-nav .lang-toggle{
+    background:rgba(255,255,255,0.1);color:white;border-color:rgba(255,255,255,0.25);
+    font-size:0.95rem;padding:0.7rem 1.3rem;
+  }
+  .mobile-nav .lang-toggle:hover{background:var(--coral);color:white;}
 
   /* ---------- header ---------- */
   .site-header{
@@ -144,7 +185,7 @@
     content:'';position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--coral);transition:width .3s var(--ease);
   }
   .nav-links a:hover::after{width:100%;}
-  .header-actions{display:flex;align-items:center;gap:1rem;flex:none;}
+  .header-actions{display:flex;align-items:center;gap:0.8rem;flex:none;}
   .call-pill{
     display:flex;align-items:center;gap:0.5rem;
     font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:0.9rem;
@@ -169,7 +210,7 @@
   .menu-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
   .mobile-nav{
     display:none;position:fixed;inset:0;background:var(--teal-950);z-index:99;
-    flex-direction:column;align-items:center;justify-content:center;gap:2rem;
+    flex-direction:column;align-items:center;justify-content:center;gap:1.7rem;
     opacity:0;pointer-events:none;transition:opacity .4s var(--ease);
     padding:2rem 1.5rem;
     overflow-y:auto;
@@ -200,13 +241,19 @@
     .nav-wrap{gap:0.5rem;}
     .logo{font-size:1.08rem;gap:0.4rem;}
     .logo-mark{width:30px;height:30px;}
-    .header-actions{gap:0.5rem;}
+    .header-actions{gap:0.45rem;}
     .call-pill{width:38px;height:38px;}
+    .header-actions .lang-toggle{width:38px;height:38px;}
     .menu-toggle{width:40px;height:40px;padding:8px;}
   }
   @media (max-width:400px){
     .logo{font-size:0.96rem;}
     .logo-mark{width:26px;height:26px;border-radius:6px;}
+    .header-actions{gap:0.35rem;}
+    .call-pill{width:36px;height:36px;}
+    .header-actions .lang-toggle{width:36px;height:36px;}
+    .header-actions .lang-toggle svg{width:15px;height:15px;}
+    .menu-toggle{width:36px;height:36px;}
   }
 
   /* ---------- hero ---------- */
@@ -606,13 +653,17 @@
       <span class="logo-text">Buddha <span class="logo-accent">Dental Hospital</span></span>
     </a>
     <nav class="nav-links">
-      <a href="#services">Services</a>
-      <a href="#gallery">Gallery</a>
-      <a href="#why">Why Us</a>
-      <a href="#reviews">Reviews</a>
-      <a href="#contact">Contact</a>
+      <a href="#services" data-hi="सेवाएं">Services</a>
+      <a href="#gallery" data-hi="गैलरी">Gallery</a>
+      <a href="#why" data-hi="हमारे बारे में">Why Us</a>
+      <a href="#reviews" data-hi="रिव्यू">Reviews</a>
+      <a href="#contact" data-hi="संपर्क करें">Contact</a>
     </nav>
     <div class="header-actions">
+      <button class="lang-toggle" id="langToggle" type="button" aria-label="Translate this page to Hindi">
+        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.5 2.6 4 5.7 4 9s-1.5 6.4-4 9c-2.5-2.6-4-5.7-4-9s1.5-6.4 4-9z" stroke="currentColor" stroke-width="1.6"/></svg>
+        <span class="lang-toggle-label">हिंदी</span>
+      </button>
       <a class="call-pill" href="tel:+919934646707">
         <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
         <span>9934646707</span>
@@ -628,30 +679,30 @@
   <button class="mobile-nav-close" id="mobileNavClose" aria-label="Close menu">
     <svg viewBox="0 0 24 24" fill="none"><path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
   </button>
-  <a href="#services">Services</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#why">Why Us</a>
-  <a href="#reviews">Reviews</a>
-  <a href="#contact">Contact</a>
-  <a class="call-pill" href="tel:+919934646707">Call 9934646707</a>
+  <a href="#services" data-hi="सेवाएं">Services</a>
+  <a href="#gallery" data-hi="गैलरी">Gallery</a>
+  <a href="#why" data-hi="हमारे बारे में">Why Us</a>
+  <a href="#reviews" data-hi="रिव्यू">Reviews</a>
+  <a href="#contact" data-hi="संपर्क करें">Contact</a>
+  <a class="call-pill" href="tel:+919934646707"><span data-hi="कॉल करें 9934646707">Call 9934646707</span></a>
 </div>
 
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-copy reveal">
-      <p class="eyebrow">Kankarbagh, Patna · Open Daily 9 AM – 6 PM</p>
-      <h1>Your smile deserves <em>expert</em> care — guaranteed.</h1>
-      <p class="lede">Thirty years and 2.5 lakh+ smiles later, Buddha Dental Hospital is Kankarbagh's trusted stop for every dental need — from a quiet checkup to an urgent toothache at midnight.</p>
+      <p class="eyebrow" data-hi="कंकड़बाग, पटना · रोज़ सुबह 9 से शाम 6 बजे तक खुला">Kankarbagh, Patna · Open Daily 9 AM – 6 PM</p>
+      <h1 data-hi-html="आपकी मुस्कान के लिए चाहिए <em>एक्सपर्ट</em> केयर — गारंटी के साथ।">Your smile deserves <em>expert</em> care — guaranteed.</h1>
+      <p class="lede" data-hi="तीस वर्षों और 2.5 लाख+ मुस्कानों के बाद, बुद्धा डेंटल हॉस्पिटल कंकड़बाग में हर दांत की ज़रूरत के लिए भरोसेमंद जगह है — रूटीन चेकअप से लेकर आधी रात के दर्द तक।">Thirty years and 2.5 lakh+ smiles later, Buddha Dental Hospital is Kankarbagh's trusted stop for every dental need — from a quiet checkup to an urgent toothache at midnight.</p>
       <div class="hero-actions">
         <a class="btn btn-primary" href="tel:+919934646707">
           <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          Call 9934646707
+          <span data-hi="कॉल करें 9934646707">Call 9934646707</span>
         </a>
-        <a class="btn btn-ghost" href="#services">See our services</a>
+        <a class="btn btn-ghost" href="#services" data-hi="हमारी सेवाएं देखें">See our services</a>
       </div>
       <p class="offer-pill">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5L12 2z" fill="currentColor"/></svg>
-        50% off your consultation fee — today only
+        <span data-hi="आज ही कंसल्टेशन फीस पर 50% छूट">50% off your consultation fee — today only</span>
       </p>
     </div>
 
@@ -660,12 +711,12 @@
       <img class="director-photo" src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783181328/Untitled_picfhture-removebg-preview_mw5bew.png" alt="Dr Amal Kishore, Director, Buddha Dental Hospital" loading="lazy">
       <div class="director-tag">
         <b>Dr Amal Kishore</b>
-        <span>DIRECTOR, BUDDHA DENTAL HOSPITAL</span>
+        <span data-hi="डायरेक्टर, बुद्धा डेंटल हॉस्पिटल">DIRECTOR, BUDDHA DENTAL HOSPITAL</span>
       </div>
 
       <div class="float-badge badge-1">
         <svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <div><b>Head</b><small>Dental Surgeon</small></div>
+        <div><b data-hi="हेड">Head</b><small data-hi="डेंटल सर्जन">Dental Surgeon</small></div>
       </div>
      
     </div>
@@ -678,10 +729,10 @@
 
 <section class="stats-section">
   <div class="container stats-grid reveal-stagger" id="statsGrid">
-    <div class="stat-item"><div class="stat-num" data-target="30" data-suffix="+">0</div><div class="stat-label">Years of service</div></div>
-    <div class="stat-item"><div class="stat-num" data-target="250000" data-suffix="+">0</div><div class="stat-label">Patients treated</div></div>
-    <div class="stat-item"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-label">Satisfaction guarantee</div></div>
-    <div class="stat-item"><div class="stat-num mono">9–6</div><div class="stat-label">Open every day</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="30" data-suffix="+">0</div><div class="stat-label" data-hi="वर्षों की सेवा">Years of service</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="250000" data-suffix="+">0</div><div class="stat-label" data-hi="मरीज़ों का इलाज">Patients treated</div></div>
+    <div class="stat-item"><div class="stat-num" data-target="100" data-suffix="%">0</div><div class="stat-label" data-hi="संतुष्टि की गारंटी">Satisfaction guarantee</div></div>
+    <div class="stat-item"><div class="stat-num mono">9–6</div><div class="stat-label" data-hi="हर दिन खुला">Open every day</div></div>
   </div>
 </section>
 
@@ -696,8 +747,8 @@
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
       </span>
-      <span class="rating-count">800+ ratings</span>
-      <span class="rating-source">· Justdial &amp; Google</span>
+      <span class="rating-count" data-hi="800+ रेटिंग">800+ ratings</span>
+      <span class="rating-source" data-hi="· जस्टडायल और गूगल">· Justdial &amp; Google</span>
     </div>
     <div class="testimonial-carousel reveal" id="testimonialCarousel">
       <div class="testimonial-card active">
@@ -711,7 +762,7 @@
         <q>The staff and doctor are always well-behaved and attentive. Whenever anyone in my family has a dental problem, this is where we come — we always leave with an immediate solution.</q>
         <div class="testi-author">
           <b>Dablu Singh</b>
-          <span>Patient &amp; local resident</span>
+          <span data-hi="मरीज़ और स्थानीय निवासी">Patient &amp; local resident</span>
         </div>
       </div>
       <div class="testimonial-card">
@@ -725,7 +776,7 @@
         <q>Rated this the best hospital in Patna for tooth troubles after coming in for an extraction — the whole visit went smoothly and comfortably.</q>
         <div class="testi-author">
           <b>Nitish Singh</b>
-          <span>Verified visit · Tooth extraction</span>
+          <span data-hi="सत्यापित विज़िट · दांत निकालना">Verified visit · Tooth extraction</span>
         </div>
       </div>
       <div class="testimonial-card">
@@ -739,7 +790,7 @@
         <q>Happy with how a dental fitting turned out here — friendly service and a genuinely pleasant experience overall.</q>
         <div class="testi-author">
           <b>Anjali Gupta</b>
-          <span>Verified visit · Dental fitting</span>
+          <span data-hi="सत्यापित विज़िट · डेंटल फिटिंग">Verified visit · Dental fitting</span>
         </div>
       </div>
       <div class="testimonial-card">
@@ -753,7 +804,7 @@
         <q>Good treatment here. Doctors behaviour is better than other local dentist doctor.</q>
         <div class="testi-author">
           <b>Satyam Gupta</b>
-          <span>Verified visit · RCT</span>
+          <span data-hi="सत्यापित विज़िट · आरसीटी">Verified visit · RCT</span>
         </div>
       </div>
       <div class="testimonial-card">
@@ -767,7 +818,7 @@
         <q>I am very satisfied — my root canal treatment was smooth, with no unnecessary procedures and honest, high-quality care throughout. It was highly professional yet budget-friendly, and my scaling and filling were quick and cost-effective.</q>
         <div class="testi-author">
           <b>Himanshu</b>
-          <span>Verified visit · General Treatment</span>
+          <span data-hi="सत्यापित विज़िट · सामान्य उपचार">Verified visit · General Treatment</span>
         </div>
       </div>
       <div class="testimonial-card">
@@ -781,7 +832,7 @@
         <q>I had a very good experience at Buddha Dental Hospital. The facilities are clean and well-maintained, and the doctors and staff are polite, professional, and supportive. Treatment is done carefully and with full attention, and they listen to patients properly before guiding them.</q>
         <div class="testi-author">
           <b>Piyush Singh</b>
-          <span>Verified visit · Dental Cap</span>
+          <span data-hi="सत्यापित विज़िट · डेंटल कैप">Verified visit · Dental Cap</span>
         </div>
       </div>
     </div>
@@ -794,7 +845,7 @@
       <button class="carousel-dot" data-index="5" aria-label="Show review 6"></button>
     </div>
     <div class="review-link-wrap reveal">
-      <a class="review-link" href="https://share.google/lKLeZY02SCoYvA1nL" target="_blank" rel="noopener">Read more reviews on Google →</a>
+      <a class="review-link" href="https://share.google/lKLeZY02SCoYvA1nL" target="_blank" rel="noopener" data-hi="गूगल पर और रिव्यू पढ़ें →">Read more reviews on Google →</a>
     </div>
   </div>
 </section>
@@ -802,30 +853,30 @@
 <section class="features-section" id="why">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Why choose us</p>
-      <h2>Care built around trust, not just treatment</h2>
-      <p>Every visit is designed to be affordable, comfortable and dependable — the way dental care should feel.</p>
+      <p class="eyebrow" data-hi="हमें क्यों चुनें">Why choose us</p>
+      <h2 data-hi="सिर्फ इलाज नहीं, भरोसे पर बना केयर">Care built around trust, not just treatment</h2>
+      <p data-hi="हर विज़िट को किफायती, आरामदायक और भरोसेमंद बनाया गया है — जैसा डेंटल केयर होना चाहिए।">Every visit is designed to be affordable, comfortable and dependable — the way dental care should feel.</p>
     </div>
     <div class="feature-grid reveal-stagger">
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 10l9-6 9 6-9 6-9-6z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M7 13v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4" stroke="currentColor" stroke-width="1.6"/></svg></div>
-        <h3>Affordable pricing</h3>
-        <p>Quality dentistry without the premium markup — care that fits real family budgets.</p>
+        <h3 data-hi="किफायती कीमत">Affordable pricing</h3>
+        <p data-hi="बिना ज़्यादा खर्च के क्वालिटी डेंटिस्ट्री — जो हर परिवार के बजट में फिट हो।">Quality dentistry without the premium markup — care that fits real family budgets.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-4.4-9.5-9C.6 8.1 3 4 7 4c2 0 3.6 1.2 5 3 1.4-1.8 3-3 5-3 4 0 6.4 4.1 4.5 8-2.5 4.6-9.5 9-9.5 9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <h3>Painless &amp; comfortable</h3>
-        <p>Modern technique and a gentle chairside manner keep every procedure stress-free.</p>
+        <h3 data-hi="दर्द-रहित और आरामदायक">Painless &amp; comfortable</h3>
+        <p data-hi="आधुनिक तकनीक और सौम्य व्यवहार से हर प्रोसीजर तनाव-मुक्त रहता है।">Modern technique and a gentle chairside manner keep every procedure stress-free.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 5-3 8.5-7 9-4-.5-7-4-7-9V6l7-3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
-        <h3>Experienced dentists</h3>
-        <p>Three decades of practice and a proven record patients keep returning to.</p>
+        <h3 data-hi="अनुभवी डेंटिस्ट">Experienced dentists</h3>
+        <p data-hi="तीन दशकों का अनुभव और मरीज़ों का भरोसा, जो बार-बार लौटते हैं।">Three decades of practice and a proven record patients keep returning to.</p>
       </div>
       <div class="feature-card">
         <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <h3>Guaranteed solution</h3>
-        <p>If your treatment doesn't deliver, we make it right — that's our word.</p>
+        <h3 data-hi="गारंटीड समाधान">Guaranteed solution</h3>
+        <p data-hi="अगर इलाज से फायदा न हो, तो हम उसे सही करते हैं — यही हमारा वचन है।">If your treatment doesn't deliver, we make it right — that's our word.</p>
       </div>
     </div>
   </div>
@@ -834,9 +885,9 @@
 <section class="gallery-section" id="gallery">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Inside the clinic</p>
-      <h2>A look around Buddha Dental Hospital</h2>
-      <p>A glimpse of our clinic and care in action.</p>
+      <p class="eyebrow" data-hi="क्लिनिक के भीतर">Inside the clinic</p>
+      <h2 data-hi="बुद्धा डेंटल हॉस्पिटल की एक झलक">A look around Buddha Dental Hospital</h2>
+      <p data-hi="हमारे क्लिनिक और केयर की एक झलक।">A glimpse of our clinic and care in action.</p>
     </div>
     <div class="gallery-grid reveal-stagger">
       <div class="gallery-item">
@@ -845,23 +896,23 @@
       </div>
       <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783180396/unnamed_1_yp9brz.png" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">Care in action</div>
+        <div class="gallery-caption" data-hi="काम करते हुए केयर">Care in action</div>
       </div>
       <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783179232/unnamed_4_a03xcl.webp" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">Best dental care</div>
+        <div class="gallery-caption" data-hi="बेहतरीन डेंटल केयर">Best dental care</div>
       </div>
       <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783180487/Untigtled_picture_gdndwq.png" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">At main road</div>
+        <div class="gallery-caption" data-hi="मुख्य सड़क पर">At main road</div>
       </div>
      <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783180727/Untitledf_picture_jiwzdh.png" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">Reception Area</div>
+        <div class="gallery-caption" data-hi="रिसेप्शन एरिया">Reception Area</div>
       </div>
     <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783180836/Untitsled_picture_tsrlhr.png" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">Top Tier Dentists</div>
+        <div class="gallery-caption" data-hi="टॉप डेंटिस्ट">Top Tier Dentists</div>
       </div>
     </div>
   </div>
@@ -870,35 +921,35 @@
 <section class="services-section" id="services">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Our services</p>
-      <h2>One clinic, every dental need</h2>
-      <p>From a routine cleaning to an urgent midnight ache, we cover the full spectrum of dental care under one roof.</p>
+      <p class="eyebrow" data-hi="हमारी सेवाएं">Our services</p>
+      <h2 data-hi="एक क्लिनिक, हर डेंटल ज़रूरत">One clinic, every dental need</h2>
+      <p data-hi="रूटीन क्लीनिंग से लेकर आधी रात के दर्द तक, हम एक ही छत के नीचे पूरी डेंटल केयर देते हैं।">From a routine cleaning to an urgent midnight ache, we cover the full spectrum of dental care under one roof.</p>
     </div>
     <div class="services-grid reveal-stagger">
       <div class="service-card">
-        <span class="service-num">General</span>
-        <h3>General Dentistry</h3>
-        <p>Cleanings, fillings, root canals and extractions handled with care and precision.</p>
+        <span class="service-num" data-hi="जनरल">General</span>
+        <h3 data-hi="जनरल डेंटिस्ट्री">General Dentistry</h3>
+        <p data-hi="क्लीनिंग, फिलिंग, रूट कैनाल और दांत निकालना — पूरी सावधानी से।">Cleanings, fillings, root canals and extractions handled with care and precision.</p>
       </div>
       <div class="service-card">
-        <span class="service-num">Urgent</span>
-        <h3>Emergency Dental Care</h3>
-        <p>Sudden pain or a broken tooth? Fast relief and urgent treatment when you need it most.</p>
+        <span class="service-num" data-hi="इमरजेंसी">Urgent</span>
+        <h3 data-hi="इमरजेंसी डेंटल केयर">Emergency Dental Care</h3>
+        <p data-hi="अचानक दर्द या टूटा दांत? जब सबसे ज़्यादा ज़रूरत हो, तुरंत इलाज।">Sudden pain or a broken tooth? Fast relief and urgent treatment when you need it most.</p>
       </div>
       <div class="service-card">
-        <span class="service-num">Aesthetic</span>
-        <h3>Cosmetic Dentistry</h3>
-        <p>Whitening, veneers and full smile makeovers designed around your face and confidence.</p>
+        <span class="service-num" data-hi="कॉस्मेटिक">Aesthetic</span>
+        <h3 data-hi="कॉस्मेटिक डेंटिस्ट्री">Cosmetic Dentistry</h3>
+        <p data-hi="व्हाइटनिंग, विनियर और पूरा स्माइल मेकओवर — आपके चेहरे और कॉन्फिडेंस के अनुसार।">Whitening, veneers and full smile makeovers designed around your face and confidence.</p>
       </div>
       <div class="service-card">
-        <span class="service-num">Alignment</span>
-        <h3>Orthodontics</h3>
-        <p>Invisalign and braces for a straighter bite at any age.</p>
+        <span class="service-num" data-hi="अलाइनमेंट">Alignment</span>
+        <h3 data-hi="ऑर्थोडॉन्टिक्स">Orthodontics</h3>
+        <p data-hi="किसी भी उम्र में सीधे दांतों के लिए इनविज़लाइन और ब्रेसेस।">Invisalign and braces for a straighter bite at any age.</p>
       </div>
       <div class="service-card">
-        <span class="service-num">Routine</span>
-        <h3>Preventive Care</h3>
-        <p>Regular checkups and early detection to stop problems before they start.</p>
+        <span class="service-num" data-hi="रूटीन">Routine</span>
+        <h3 data-hi="प्रिवेंटिव केयर">Preventive Care</h3>
+        <p data-hi="नियमित चेकअप और शुरुआती पहचान से समस्याओं को पहले ही रोकें।">Regular checkups and early detection to stop problems before they start.</p>
       </div>
     </div>
   </div>
@@ -907,22 +958,22 @@
 <section class="location-section">
   <div class="container location-grid">
     <div class="location-copy reveal">
-      <p class="eyebrow">Find us</p>
-      <h2>Visit the clinic in Kankarbagh</h2>
+      <p class="eyebrow" data-hi="हमें खोजें">Find us</p>
+      <h2 data-hi="कंकड़बाग के क्लिनिक में आएं">Visit the clinic in Kankarbagh</h2>
       <div class="info-row">
         <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
-        <div><b>Address</b><span>Opp. Rajender Nagar Terminal, New Colony, Munna Chak, Kankarbagh, Chitragupta Nagar, Patna, Bihar 800020</span></div>
+        <div><b data-hi="पता">Address</b><span>Opp. Rajender Nagar Terminal, New Colony, Munna Chak, Kankarbagh, Chitragupta Nagar, Patna, Bihar 800020</span></div>
       </div>
       <div class="info-row">
         <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-        <div><b>Hours</b><span>Open every day, 9:00 AM – 6:00 PM</span></div>
+        <div><b data-hi="समय">Hours</b><span data-hi="हर दिन खुला, सुबह 9 बजे से शाम 6 बजे तक">Open every day, 9:00 AM – 6:00 PM</span></div>
       </div>
       <div class="info-row">
         <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        <div><b>Phone</b><span>9934646707, 9386596070</span></div>
+        <div><b data-hi="फोन">Phone</b><span>9934646707, 9386596070</span></div>
       </div>
       <div style="margin-top:1.8rem;">
-        <a class="btn btn-light" href="tel:+919934646707">Call the clinic</a>
+        <a class="btn btn-light" href="tel:+919934646707" data-hi="क्लिनिक को कॉल करें">Call the clinic</a>
       </div>
     </div>
     <div class="map-frame reveal">
@@ -934,29 +985,29 @@
 <section class="booking-section" id="book">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Booking</p>
-      <h2>Three steps to your appointment</h2>
-      <p>No portals, no waiting online — just a call and you're on the schedule.</p>
+      <p class="eyebrow" data-hi="बुकिंग">Booking</p>
+      <h2 data-hi="अपॉइंटमेंट के लिए तीन आसान स्टेप">Three steps to your appointment</h2>
+      <p data-hi="कोई पोर्टल नहीं, कोई ऑनलाइन इंतज़ार नहीं — बस एक कॉल और आपकी बुकिंग हो जाएगी।">No portals, no waiting online — just a call and you're on the schedule.</p>
     </div>
     <div class="steps reveal-stagger">
       <div class="step-card">
         <div class="step-num">1</div>
-        <h3>Call the clinic</h3>
-        <p>Dial 9934646707 or 9386596070 and let us know a time that works for you.</p>
+        <h3 data-hi="क्लिनिक को कॉल करें">Call the clinic</h3>
+        <p data-hi="9934646707 या 9386596070 पर कॉल करें और अपने लिए सही समय बताएं।">Dial 9934646707 or 9386596070 and let us know a time that works for you.</p>
       </div>
       <div class="step-card">
         <div class="step-num">2</div>
-        <h3>Mention the offer</h3>
-        <p>Ask about the 50% off consultation fee to claim today's discount.</p>
+        <h3 data-hi="ऑफर का ज़िक्र करें">Mention the offer</h3>
+        <p data-hi="आज की 50% छूट पाने के लिए कंसल्टेशन फीस ऑफर के बारे में पूछें।">Ask about the 50% off consultation fee to claim today's discount.</p>
       </div>
       <div class="step-card">
         <div class="step-num">3</div>
-        <h3>Visit us</h3>
-        <p>Walk into the Kankarbagh clinic and we'll take care of the rest.</p>
+        <h3 data-hi="हमसे मिलें">Visit us</h3>
+        <p data-hi="कंकड़बाग क्लिनिक आएं, बाकी सब हम संभाल लेंगे।">Walk into the Kankarbagh clinic and we'll take care of the rest.</p>
       </div>
     </div>
     <div class="booking-cta reveal">
-      <a class="btn btn-primary" href="tel:+919934646707">Call now: 9934646707</a>
+      <a class="btn btn-primary" href="tel:+919934646707" data-hi="अभी कॉल करें: 9934646707">Call now: 9934646707</a>
     </div>
   </div>
 </section>
@@ -965,17 +1016,17 @@
   <div class="container">
     <div class="review-cta-card reveal">
       <div>
-        <h3>Loved by families across Bihar</h3>
-        <p>Read what patients are saying about their visits to Buddha Dental Hospital.</p>
+        <h3 data-hi="बिहार भर के परिवारों का भरोसा">Loved by families across Bihar</h3>
+        <p data-hi="पढ़ें मरीज़ बुद्धा डेंटल हॉस्पिटल की विज़िट के बारे में क्या कहते हैं।">Read what patients are saying about their visits to Buddha Dental Hospital.</p>
       </div>
-      <a class="btn btn-primary" href="https://share.google/ZRPc41G8mPD4cKKCL" target="_blank" rel="noopener">View Google reviews</a>
+      <a class="btn btn-primary" href="https://share.google/ZRPc41G8mPD4cKKCL" target="_blank" rel="noopener" data-hi="गूगल रिव्यू देखें">View Google reviews</a>
     </div>
     <div class="chip-row reveal-stagger">
-      <div class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4.5★ from 800+ ratings</div>
-      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.8"/></svg>Kankarbagh, Patna</div>
-      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>30 years in practice</div>
-      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>2.5 lakh+ patients treated</div>
-      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5L12 2z" fill="currentColor"/></svg>Family-run &amp; family-trusted</div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg><span data-hi="800+ रेटिंग में से 4.5★">4.5★ from 800+ ratings</span></div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.8"/></svg><span data-hi="कंकड़बाग, पटना">Kankarbagh, Patna</span></div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-hi="30 वर्षों का अनुभव">30 years in practice</span></div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg><span data-hi="2.5 लाख+ मरीज़ों का इलाज">2.5 lakh+ patients treated</span></div>
+      <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 2l2.4 6.5L21 11l-6.6 2.5L12 20l-2.4-6.5L3 11l6.6-2.5L12 2z" fill="currentColor"/></svg><span data-hi="पारिवारिक और भरोसेमंद">Family-run &amp; family-trusted</span></div>
     </div>
   </div>
 </section>
@@ -983,35 +1034,35 @@
 <section class="contact-section" id="contact">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Get in touch</p>
-      <h2>Questions before you visit?</h2>
-      <p>Call us directly for the fastest response, or send a message and we'll get back to you.</p>
+      <p class="eyebrow" data-hi="संपर्क करें">Get in touch</p>
+      <h2 data-hi="आने से पहले कोई सवाल?">Questions before you visit?</h2>
+      <p data-hi="जल्द जवाब के लिए सीधे कॉल करें, या मैसेज भेजें, हम आपसे जल्द संपर्क करेंगे।">Call us directly for the fastest response, or send a message and we'll get back to you.</p>
     </div>
     <div class="contact-grid">
       <div class="contact-details reveal">
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <div><b>Phone</b><span>9934646707, 9386596070</span></div>
+          <div><b data-hi="फोन">Phone</b><span>9934646707, 9386596070</span></div>
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <div><b>Email</b><span style="word-break:break-all;">kishoreamartya1@gmail.com</span></div>
+          <div><b data-hi="ईमेल">Email</b><span style="word-break:break-all;">kishoreamartya1@gmail.com</span></div>
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="9" r="2.4" stroke="currentColor" stroke-width="1.6"/></svg>
-          <div><b>Address</b><span>Opp. Rajender Nagar Terminal, New Colony, Munna Chak, Kankarbagh, Patna, Bihar 800020</span></div>
+          <div><b data-hi="पता">Address</b><span>Opp. Rajender Nagar Terminal, New Colony, Munna Chak, Kankarbagh, Patna, Bihar 800020</span></div>
         </div>
       </div>
       <form class="contact-form reveal" action="mailto:kishoreamartya1@gmail.com" method="get" enctype="text/plain">
         <div class="form-row">
-          <div class="field"><label for="name">Name</label><input id="name" name="name" type="text" placeholder="Your name" required></div>
-          <div class="field"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" placeholder="Your phone number" required></div>
+          <div class="field"><label for="name" data-hi="नाम">Name</label><input id="name" name="name" type="text" placeholder="Your name" data-hi-placeholder="आपका नाम" required></div>
+          <div class="field"><label for="phone" data-hi="फोन">Phone</label><input id="phone" name="phone" type="tel" placeholder="Your phone number" data-hi-placeholder="आपका फोन नंबर" required></div>
         </div>
         <div class="field full" style="margin-bottom:1rem;">
-          <label for="message">Message</label>
-          <textarea id="message" name="message" placeholder="Tell us what's bothering you..."></textarea>
+          <label for="message" data-hi="मैसेज">Message</label>
+          <textarea id="message" name="message" placeholder="Tell us what's bothering you..." data-hi-placeholder="बताएं आपको क्या समस्या है..."></textarea>
         </div>
-        <button class="btn btn-primary" type="submit">Send message</button>
+        <button class="btn btn-primary" type="submit" data-hi="मैसेज भेजें">Send message</button>
       </form>
     </div>
   </div>
@@ -1022,18 +1073,18 @@
     <div class="footer-top">
       <div>
         <a class="footer-logo" href="#top">Buddha<span>Dental Hospital</span></a>
-        <p style="margin-top:0.8rem;max-width:32ch;color:rgba(255,255,255,0.6);font-size:0.88rem;">Trusted dental care in Kankarbagh, Patna for over 30 years.</p>
+        <p style="margin-top:0.8rem;max-width:32ch;color:rgba(255,255,255,0.6);font-size:0.88rem;" data-hi="कंकड़बाग, पटना में 30 वर्षों से भरोसेमंद डेंटल केयर।">Trusted dental care in Kankarbagh, Patna for over 30 years.</p>
       </div>
       <ul class="footer-nav">
-        <li><a href="#services">Services</a></li>
-        <li><a href="#gallery">Gallery</a></li>
-        <li><a href="#why">Why Us</a></li>
-        <li><a href="#reviews">Reviews</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="#services" data-hi="सेवाएं">Services</a></li>
+        <li><a href="#gallery" data-hi="गैलरी">Gallery</a></li>
+        <li><a href="#why" data-hi="हमारे बारे में">Why Us</a></li>
+        <li><a href="#reviews" data-hi="रिव्यू">Reviews</a></li>
+        <li><a href="#contact" data-hi="संपर्क करें">Contact</a></li>
       </ul>
     </div>
     <div class="footer-bottom">
-      <span>© 2026 Buddha Dental Hospital. All rights reserved.</span>
+      <span data-hi="© 2026 बुद्धा डेंटल हॉस्पिटल. सर्वाधिकार सुरक्षित।">© 2026 Buddha Dental Hospital. All rights reserved.</span>
       <span>Munna Chak, Kankarbagh, Patna, Bihar 800020 · 9934646707</span>
     </div>
   </div>
@@ -1069,7 +1120,9 @@
     else openMobileNav();
   });
   mobileNavClose.addEventListener('click', closeMobileNav);
-  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileNav));
+  mobileNav.querySelectorAll('a').forEach(a => {
+    if (!a.closest('.lang-toggle')) a.addEventListener('click', closeMobileNav);
+  });
 
   // scroll reveal
   const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
@@ -1150,6 +1203,46 @@
     });
   }, { threshold: 0.4 });
   statIo.observe(statsGrid);
+
+  // ---------- one-click Hindi translation ----------
+  (function(){
+    const textNodes = document.querySelectorAll('[data-hi]');
+    const htmlNodes = document.querySelectorAll('[data-hi-html]');
+    const placeholderNodes = document.querySelectorAll('[data-hi-placeholder]');
+    const langButtons = document.querySelectorAll('.lang-toggle');
+    let currentLang = 'en';
+
+    function setLanguage(lang){
+      currentLang = lang;
+
+      textNodes.forEach(el => {
+        if (el.dataset.enCache === undefined) el.dataset.enCache = el.textContent;
+        el.textContent = lang === 'hi' ? el.dataset.hi : el.dataset.enCache;
+      });
+
+      htmlNodes.forEach(el => {
+        if (el.dataset.enHtmlCache === undefined) el.dataset.enHtmlCache = el.innerHTML;
+        el.innerHTML = lang === 'hi' ? el.dataset.hiHtml : el.dataset.enHtmlCache;
+      });
+
+      placeholderNodes.forEach(el => {
+        if (el.dataset.enPlaceholderCache === undefined) el.dataset.enPlaceholderCache = el.placeholder;
+        el.placeholder = lang === 'hi' ? el.dataset.hiPlaceholder : el.dataset.enPlaceholderCache;
+      });
+
+      document.documentElement.lang = lang;
+
+      langButtons.forEach(btn => {
+        const label = btn.querySelector('.lang-toggle-label');
+        if (label) label.textContent = lang === 'hi' ? 'English' : 'हिंदी';
+        btn.setAttribute('aria-label', lang === 'hi' ? 'Switch this page to English' : 'Translate this page to Hindi');
+      });
+    }
+
+    langButtons.forEach(btn => {
+      btn.addEventListener('click', () => setLanguage(currentLang === 'en' ? 'hi' : 'en'));
+    });
+  })();
 </script>
 </body>
 </html>
