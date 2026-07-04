@@ -288,23 +288,56 @@
 
   /* ---------- testimonial ---------- */
   .testimonial-section{padding:6rem 0;background:var(--cream);}
+  .rating-badge{
+    display:flex;align-items:center;justify-content:center;gap:0.7rem;
+    max-width:fit-content;margin:0 auto 3rem;
+    background:white;border:1px solid var(--line);border-radius:999px;
+    padding:0.7rem 1.4rem;box-shadow:var(--shadow);
+  }
+  .rating-badge .rating-num{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1.15rem;color:var(--teal-950);}
+  .rating-badge .rating-stars{display:flex;gap:2px;}
+  .rating-badge .rating-stars svg{width:15px;height:15px;color:var(--coral);}
+  .rating-badge .rating-count{font-size:0.82rem;color:var(--ink-soft);}
+  .rating-badge .rating-source{font-size:0.78rem;color:var(--teal-700);font-weight:600;}
+  .testimonial-carousel{
+    position:relative;max-width:680px;margin:0 auto;
+    display:grid;
+  }
   .testimonial-card{
-    max-width:760px;margin:0 auto;text-align:center;
-    background:white;border-radius:28px;padding:3rem 2.5rem;box-shadow:var(--shadow);
+    grid-area:1 / 1;
+    text-align:center;
+    background:white;border-radius:28px;padding:2.6rem 2.4rem;box-shadow:var(--shadow);
     border:1px solid var(--line);
+    display:flex;flex-direction:column;
+    opacity:0;transform:translateY(18px) scale(0.98);pointer-events:none;
+    transition:opacity .7s var(--ease), transform .7s var(--ease);
+  }
+  .testimonial-card.active{
+    opacity:1;transform:translateY(0) scale(1);pointer-events:auto;position:relative;z-index:2;
+  }
+  .testimonial-carousel:hover .testimonial-card.active{
+    box-shadow:0 26px 60px -22px rgba(11,61,58,0.45);transform:translateY(-4px) scale(1.01);
   }
   .stars{display:flex;justify-content:center;gap:4px;margin-bottom:1.3rem;}
-  .stars svg{width:18px;height:18px;color:var(--coral);}
-  .testimonial-card q{font-family:'Fraunces',serif;font-size:1.4rem;line-height:1.5;color:var(--teal-950);font-style:italic;}
-  .testi-author{margin-top:1.6rem;display:flex;flex-direction:column;gap:0.2rem;}
-  .testi-author b{font-family:'Inter',sans-serif;color:var(--teal-950);}
-  .testi-author span{font-size:0.85rem;color:var(--ink-soft);}
-  .review-link{margin-top:1.5rem;display:inline-flex;font-size:0.85rem;font-weight:600;color:var(--teal-700);border-bottom:1px solid var(--teal-700);padding-bottom:2px;}
+  .stars svg{width:16px;height:16px;color:var(--coral);}
+  .testimonial-card q{font-family:'Fraunces',serif;font-size:1.15rem;line-height:1.55;color:var(--teal-950);font-style:italic;flex:1;}
+  .testi-author{margin-top:1.4rem;display:flex;flex-direction:column;gap:0.2rem;}
+  .testi-author b{font-family:'Inter',sans-serif;color:var(--teal-950);font-size:0.92rem;}
+  .testi-author span{font-size:0.78rem;color:var(--ink-soft);}
+  .carousel-dots{display:flex;justify-content:center;gap:0.6rem;margin-top:2.2rem;flex-wrap:wrap;}
+  .carousel-dot{
+    width:9px;height:9px;border-radius:50%;background:var(--line);border:none;cursor:pointer;padding:0;
+    transition:background .35s var(--ease), transform .35s var(--ease), width .35s var(--ease);
+  }
+  .carousel-dot.active{background:var(--coral);width:26px;border-radius:5px;}
+  .review-link-wrap{text-align:center;margin-top:2.4rem;}
+  .review-link{display:inline-flex;font-size:0.85rem;font-weight:600;color:var(--teal-700);border-bottom:1px solid var(--teal-700);padding-bottom:2px;}
 
   @media (max-width:600px){
     .testimonial-section{padding:4rem 0;}
     .testimonial-card{padding:2.2rem 1.4rem;border-radius:22px;}
-    .testimonial-card q{font-size:1.15rem;}
+    .testimonial-card q{font-size:1.05rem;}
+    .rating-badge{flex-wrap:wrap;padding:0.9rem 1.2rem;margin-bottom:2.4rem;text-align:center;}
   }
 
   /* ---------- features ---------- */
@@ -621,20 +654,114 @@
 
 <section class="testimonial-section">
   <div class="container">
-    <div class="testimonial-card reveal">
-      <div class="stars">
+    <div class="rating-badge reveal">
+      <span class="rating-num">4.5</span>
+      <span class="rating-stars">
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
         <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+      </span>
+      <span class="rating-count">1,000+ ratings</span>
+      <span class="rating-source">· Justdial &amp; Google</span>
+    </div>
+    <div class="testimonial-carousel reveal" id="testimonialCarousel">
+      <div class="testimonial-card active">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>The staff and doctor are always well-behaved and attentive. Whenever anyone in my family has a dental problem, this is where we come — we always leave with an immediate solution.</q>
+        <div class="testi-author">
+          <b>Dablu Singh</b>
+          <span>Patient &amp; local resident</span>
+        </div>
       </div>
-      <q>The staff and doctor are always well-behaved and attentive. Whenever anyone in my family has a dental problem, this is where we come — we always leave with an immediate solution.</q>
-      <div class="testi-author">
-        <b>Dablu Singh</b>
-        <span>Patient &amp; local resident</span>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>Rated this the best hospital in Patna for tooth troubles after coming in for an extraction — the whole visit went smoothly and comfortably.</q>
+        <div class="testi-author">
+          <b>Nitish Singh</b>
+          <span>Verified visit · Tooth extraction</span>
+        </div>
       </div>
-      <a class="review-link" href="https://www.google.com/maps/search/?api=1&query=Buddha+Dental+Hospital+Kankarbagh+Patna" target="_blank" rel="noopener">Read more reviews on Google →</a>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>Happy with how a dental fitting turned out here — friendly service and a genuinely pleasant experience overall.</q>
+        <div class="testi-author">
+          <b>Anjali Gupta</b>
+          <span>Verified visit · Dental fitting</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>Good treatment here. Doctors behaviour is better than other local dentist doctor.</q>
+        <div class="testi-author">
+          <b>Satyam Gupta</b>
+          <span>Verified visit · RCT</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>I am very satisfied — my root canal treatment was smooth, with no unnecessary procedures and honest, high-quality care throughout. It was highly professional yet budget-friendly, and my scaling and filling were quick and cost-effective.</q>
+        <div class="testi-author">
+          <b>Himanshu</b>
+          <span>Verified visit · General Treatment</span>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>
+        </div>
+        <q>I had a very good experience at Buddha Dental Hospital. The facilities are clean and well-maintained, and the doctors and staff are polite, professional, and supportive. Treatment is done carefully and with full attention, and they listen to patients properly before guiding them.</q>
+        <div class="testi-author">
+          <b>Piyush Singh</b>
+          <span>Verified visit · Dental Cap</span>
+        </div>
+      </div>
+    </div>
+    <div class="carousel-dots" id="carouselDots">
+      <button class="carousel-dot active" data-index="0" aria-label="Show review 1"></button>
+      <button class="carousel-dot" data-index="1" aria-label="Show review 2"></button>
+      <button class="carousel-dot" data-index="2" aria-label="Show review 3"></button>
+      <button class="carousel-dot" data-index="3" aria-label="Show review 4"></button>
+      <button class="carousel-dot" data-index="4" aria-label="Show review 5"></button>
+      <button class="carousel-dot" data-index="5" aria-label="Show review 6"></button>
+    </div>
+    <div class="review-link-wrap reveal">
+      <a class="review-link" href="https://share.google/lKLeZY02SCoYvA1nL" target="_blank" rel="noopener">Read more reviews on Google →</a>
     </div>
   </div>
 </section>
@@ -689,7 +816,7 @@
       </div>
       <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783179232/unnamed_4_a03xcl.webp" alt="Buddha Dental Hospital clinic photo" loading="lazy">
-        <div class="gallery-caption">best dental care</div>
+        <div class="gallery-caption">Best dental care</div>
       </div>
       <div class="gallery-item">
         <img src="https://res.cloudinary.com/mwvdwia9/image/upload/v1783180487/Untigtled_picture_gdndwq.png" alt="Buddha Dental Hospital clinic photo" loading="lazy">
@@ -759,14 +886,14 @@
       </div>
       <div class="info-row">
         <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-        <div><b>Phone</b><span>9934646707</span></div>
+        <div><b>Phone</b><span>9934646707, 9386596070</span></div>
       </div>
       <div style="margin-top:1.8rem;">
         <a class="btn btn-light" href="tel:+919934646707">Call the clinic</a>
       </div>
     </div>
     <div class="map-frame reveal">
-      <iframe src="https://maps.google.com/maps?q=Buddha%20Dental%20Hospital%20Kankarbagh%20Patna&t=&z=15&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Buddha Dental Hospital location map"></iframe>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14392.360170057438!2d85.14606434851883!3d25.601924030897447!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39ed58ef741605e3%3A0x22e4d9d04b2d5cdf!2sBuddha%20Dental%20Hospital!5e0!3m2!1sen!2sin!4v1783188498603!5m2!1sen!2sin" loading="lazy" title="Buddha Dental Hospital location map"></iframe>
     </div>
   </div>
 </section>
@@ -782,7 +909,7 @@
       <div class="step-card">
         <div class="step-num">1</div>
         <h3>Call the clinic</h3>
-        <p>Dial 9934646707 and let us know a time that works for you.</p>
+        <p>Dial 9934646707 or 9386596070 and let us know a time that works for you.</p>
       </div>
       <div class="step-card">
         <div class="step-num">2</div>
@@ -805,12 +932,13 @@
   <div class="container">
     <div class="review-cta-card reveal">
       <div>
-        <h3>Loved by families across Kankarbagh</h3>
+        <h3>Loved by families across Bihar</h3>
         <p>Read what patients are saying about their visits to Buddha Dental Hospital.</p>
       </div>
-      <a class="btn btn-primary" href="https://www.google.com/maps/search/?api=1&query=Buddha+Dental+Hospital+Kankarbagh+Patna" target="_blank" rel="noopener">View Google reviews</a>
+      <a class="btn btn-primary" href="https://share.google/ZRPc41G8mPD4cKKCL" target="_blank" rel="noopener">View Google reviews</a>
     </div>
     <div class="chip-row reveal-stagger">
+      <div class="chip"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.8L12 17.8 5.8 21l1.2-6.8-5-4.9 6.9-1z"/></svg>4.5★ from 800+ ratings</div>
       <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M12 21s7-6.5 7-12a7 7 0 10-14 0c0 5.5 7 12 7 12z" stroke="currentColor" stroke-width="1.8"/></svg>Kankarbagh, Patna</div>
       <div class="chip"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>30 years in practice</div>
       <div class="chip"><svg viewBox="0 0 24 24" fill="none"><path d="M4 12l5 5L20 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>2.5 lakh+ patients treated</div>
@@ -830,7 +958,7 @@
       <div class="contact-details reveal">
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.5 21 3 13.5 3 4c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1L6.6 10.8z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
-          <div><b>Phone</b><span>9934646707</span></div>
+          <div><b>Phone</b><span>9934646707, 9386596070</span></div>
         </div>
         <div class="info-row">
           <svg viewBox="0 0 24 24" fill="none"><path d="M3 6h18v12H3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
@@ -870,11 +998,6 @@
         <li><a href="#reviews">Reviews</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
-      <div class="social-row">
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="none"><path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H9v3h2v6h3v-6h3l1-3h-4V9c0-.6.4-1 1-1z" fill="white"/></svg></a>
-        <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="none"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.4-1.3 1.7-2.3-.8.5-1.7.8-2.6 1a4 4 0 00-6.9 3.6A11.4 11.4 0 014 4.9a4 4 0 001.2 5.3c-.6 0-1.2-.2-1.7-.5v.1a4 4 0 003.2 3.9 4 4 0 01-1.8.1 4 4 0 003.7 2.8A8 8 0 012 18.4a11.3 11.3 0 006.1 1.8c7.3 0 11.3-6.1 11.3-11.3v-.5c.8-.6 1.4-1.3 1.9-2.1-.7.3-1.5.5-2.3.6z" fill="white"/></svg></a>
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="5" stroke="white" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="white" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1" fill="white"/></svg></a>
-      </div>
     </div>
     <div class="footer-bottom">
       <span>© 2026 Buddha Dental Hospital. All rights reserved.</span>
@@ -944,6 +1067,46 @@
     }
     requestAnimationFrame(tick);
   }
+
+  // testimonial carousel: cycles cards one after another, pauses on hover
+  const carousel = document.getElementById('testimonialCarousel');
+  if (carousel) {
+    const cards = Array.from(carousel.querySelectorAll('.testimonial-card'));
+    const dots = Array.from(document.querySelectorAll('.carousel-dot'));
+    let activeIndex = 0;
+    let timer = null;
+
+    function showSlide(index) {
+      cards.forEach((card, i) => card.classList.toggle('active', i === index));
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === index));
+      activeIndex = index;
+    }
+    function nextSlide() {
+      showSlide((activeIndex + 1) % cards.length);
+    }
+    function startAutoplay() {
+      stopAutoplay();
+      timer = setInterval(nextSlide, 4200);
+    }
+    function stopAutoplay() {
+      if (timer) clearInterval(timer);
+      timer = null;
+    }
+
+    dots.forEach(dot => {
+      dot.addEventListener('click', () => {
+        showSlide(parseInt(dot.dataset.index, 10));
+        startAutoplay();
+      });
+    });
+    carousel.addEventListener('mouseenter', stopAutoplay);
+    carousel.addEventListener('mouseleave', startAutoplay);
+    carousel.addEventListener('focusin', stopAutoplay);
+    carousel.addEventListener('focusout', startAutoplay);
+
+    startAutoplay();
+  }
+
   const statsGrid = document.getElementById('statsGrid');
   const statIo = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
